@@ -48,7 +48,7 @@ const CustomerShow = () => (
                             source="asset_type_id"
                             reference="asset_types"
                         >
-                            <TextField source="code" />
+                            <TextField source="label" />
                         </ReferenceField>
                     </ReferenceField>
 
