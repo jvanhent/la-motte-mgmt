@@ -1,43 +1,43 @@
 -- Asset types
-insert into la_motte_mgmt.asset_type (code, label)
+insert into la_motte_mgmt.asset_types (code, label)
 values ('horse', 'Cheval'),
        ('pony', 'Pony'),
        ('box', 'Box'),
        ('locker', 'Locker');
 
 -- HORSES
-insert into la_motte_mgmt.asset (asset_type_id, name)
+insert into la_motte_mgmt.assets (asset_type_id, name)
 select id, 'Horse ' || gs.n
-from la_motte_mgmt.asset_type
+from la_motte_mgmt.asset_types
          cross join generate_series(1, 3) gs(n)
 where code = 'horse';
 
 
 -- PONIES
-insert into la_motte_mgmt.asset (asset_type_id, name)
+insert into la_motte_mgmt.assets (asset_type_id, name)
 select id, 'Pony ' || gs.n
-from la_motte_mgmt.asset_type
+from la_motte_mgmt.asset_types
          cross join generate_series(1, 3) gs(n)
 where code = 'pony';
 
 
 -- BOXES
-insert into la_motte_mgmt.asset (asset_type_id, name)
+insert into la_motte_mgmt.assets (asset_type_id, name)
 select id, 'Box ' || gs.n
-from la_motte_mgmt.asset_type
+from la_motte_mgmt.asset_types
          cross join generate_series(1, 3) gs(n)
 where code = 'box';
 
 
 -- LOCKERS
-insert into la_motte_mgmt.asset (asset_type_id, name)
+insert into la_motte_mgmt.assets (asset_type_id, name)
 select id, 'Locker ' || gs.n
-from la_motte_mgmt.asset_type
+from la_motte_mgmt.asset_types
          cross join generate_series(1, 3) gs(n)
 where code = 'locker';
 
--- customers
-insert into la_motte_mgmt.customer (name, phone)
+-- customer
+insert into la_motte_mgmt.customers (name, phone)
 select *
 from (values
           ('John Peeters', '+32 475 12 34 56'),
