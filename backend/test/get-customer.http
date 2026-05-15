@@ -1,0 +1,15 @@
+### GET customer
+GET http://127.0.0.1:54321/rest/v1/customers?id=eq.1
+accept-profile: {{schema}}
+
+### GET customer with horses
+GET http://127.0.0.1:54321/rest/v1/customers?id=eq.1&select=*,links: customers_assets(asset:assets!inner(id,name,type:asset_types!inner(id,code,label)))&links.asset.type.code=eq.horse
+accept-profile: {{schema}}
+
+### GET customer with horses or ponies
+GET http://127.0.0.1:54321/rest/v1/customers?id=eq.1&select=*,links: customers_assets(asset:assets!inner(id,name,type:asset_types!inner(id,code,label)))&links.asset.type.code=in.(horse,pony)
+accept-profile: {{schema}}
+
+### GET customer with rel name
+GET http://127.0.0.1:54321/rest/v1/customers?id=eq.1&select=*,links: customers_assets(asset:assets!inner(id,name))
+accept-profile: {{schema}}
