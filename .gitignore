@@ -145,3 +145,5 @@ vite.config.ts.timestamp-*
 .idea
 *.iml
 .DS_Store
+.vercel
+.env*.local
