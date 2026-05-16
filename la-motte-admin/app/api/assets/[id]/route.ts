@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import {
     getResourceById,
     updateResource,
@@ -8,26 +7,29 @@ import { handleResult } from "@/lib/apiHandler";
 
 export async function GET(
     req: Request,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
-    const result = await getResourceById("assets", params.id);
+    const { id } = await context.params;
+    const result = await getResourceById("assets", id);
     return handleResult(result);
 }
 
 export async function PUT(
     req: Request,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
+    const { id } = await context.params;
     const body = await req.json();
 
-    const result = await updateResource("assets", params.id, body);
+    const result = await updateResource("assets", id, body);
     return handleResult(result);
 }
 
 export async function DELETE(
     req: Request,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
-    const result = await deleteResource("assets", params.id);
+    const { id } = await context.params;
+    const result = await deleteResource("assets", id);
     return handleResult(result);
 }
