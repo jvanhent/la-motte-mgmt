@@ -18,24 +18,4 @@ const dataProvider = supabaseDataProvider({
     schema: () => SUPABASE_SCHEMA,
 });
 
-export default {
-    ...dataProvider,
-
-    getCustomerAssets: async (params) => {
-        const { data, error } = await supabase.rpc('get_customer_assets', {
-            p_customer_id: params.customerId,
-            p_types: params.types, // optional
-        });
-
-        if (error) {
-            return Promise.reject(error)
-        }
-
-        return {
-            data: data.map(row => ({
-                id: row.asset_id,
-                ...row,
-            })),
-        }
-    },
-}
+export default dataProvider

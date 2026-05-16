@@ -1,6 +1,4 @@
-
-import React from "react";
-import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from "react-admin";
+import { Admin, Resource, EditGuesser, ShowGuesser } from "react-admin";
 import dataProvider from "./data-provider-config.ts";
 import AssetTypeList from "./pages/asset-types/asset-type-list.tsx";
 import AssetList from "./pages/assets/asset-list.tsx";
