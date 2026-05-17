@@ -1,10 +1,10 @@
 import {
     listResource,
-    createResource, ResourceName,
+    createResource,
 } from "@/lib/resource"
 import { handleResult } from "@/lib/apiHandler"
 
-export async function GET(req: Request, context: { params: Promise<{ resource: ResourceName }> }) {
+export async function GET(req: Request, context: { params: Promise<{ resource: string }> }) {
     const { resource } = await context.params;
     const { searchParams } = new URL(req.url);
 
@@ -21,7 +21,7 @@ export async function GET(req: Request, context: { params: Promise<{ resource: R
     return handleResult(result, resource, result.meta.range, result.count);
 }
 
-export async function POST(req: Request, context: { params: Promise<{ resource: ResourceName }> }) {
+export async function POST(req: Request, context: { params: Promise<{ resource: string }> }) {
     const { resource } = await context.params;
     const body = await req.json();
 

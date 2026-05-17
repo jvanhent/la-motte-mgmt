@@ -1,8 +1,19 @@
 import supabase from "./supabase";
 
-export type ResourceName = "customers" | "assets" | "asset_types" | "customers_assets";
+const allowed: string[] = [
+    "customers",
+    "assets",
+    "asset_types",
+];
 
-export async function listResource(resource: ResourceName, query?: any) {
+function checkResource(resource: string) {
+    if (!allowed.includes(resource)) {
+        throw new Response("Invalid resource: " + resource, { status: 400 });
+    }
+}
+
+export async function listResource(resource: string, query?: any) {
+    checkResource(resource)
     const range = query?.range
         ? JSON.parse(query.range)
         : [0, 9];
@@ -29,18 +40,22 @@ export async function listResource(resource: ResourceName, query?: any) {
     };
 }
 
-export function getResourceById(resource: ResourceName, id: string) {
+export function getResourceById(resource: string, id: string) {
+    checkResource(resource)
     return supabase.from(resource).select("*").eq("id", id).single();
 }
 
-export function createResource(resource: ResourceName, data: any) {
+export function createResource(resource: string, data: any) {
+    checkResource(resource)
     return supabase.from(resource).insert(data).select().single();
 }
 
-export function updateResource(resource: ResourceName, id: string, data: any) {
+export function updateResource(resource: string, id: string, data: any) {
+    checkResource(resource)
     return supabase.from(resource).update(data).eq("id", id).select().single();
 }
 
-export function deleteResource(resource: ResourceName, id: string) {
+export function deleteResource(resource: string, id: string) {
+    checkResource(resource)
     return supabase.from(resource).delete().eq("id", id);
 }
