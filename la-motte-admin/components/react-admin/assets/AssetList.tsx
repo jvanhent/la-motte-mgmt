@@ -8,11 +8,12 @@ import {
     ReferenceField,
     SelectInput,
     ReferenceInput,
-    BooleanInput
+    BooleanInput, TextInput
 } from 'react-admin';
 
 const assetFilters = [
     <BooleanInput source="is_active" label="Active" alwaysOn/>,
+    <TextInput source="name" label="Name"/>,
 
     <ReferenceInput source="asset_type_id" reference="asset_types" label="Type">
         <SelectInput optionText="label" />
