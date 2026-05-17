@@ -10,17 +10,17 @@ export async function GET(req: Request) {
     const range = searchParams.get("range");
     const sort = searchParams.get("sort");
 
-    const result = await listResource("asset_types", {
+    const result = await listResource("customers_assets", {
         range,
         sort,
     });
 
-    return handleResult(result, "asset_types", result.meta.range, result.count);
+    return handleResult(result, "customers_assets", result.meta.range, result.count);
 }
 
 export async function POST(req: Request) {
     const body = await req.json();
 
-    const result = await createResource("asset_types", body);
+    const result = await createResource("customers_assets", body);
     return handleResult(result);
 }

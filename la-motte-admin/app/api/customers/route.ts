@@ -8,14 +8,14 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
 
     const range = searchParams.get("range");
-    const parsedRange = range ? JSON.parse(range) : [0, 9];
+    const sort = searchParams.get("sort");
 
     const result = await listResource("customers", {
         range,
-        sort: searchParams.get("sort"),
+        sort,
     });
 
-    return handleResult(result, "assets", parsedRange, result.count);
+    return handleResult(result, "customers", result.meta.range, result.count);
 }
 
 export async function POST(req: Request) {

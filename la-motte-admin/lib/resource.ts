@@ -1,6 +1,6 @@
 import supabase from "./supabase";
 
-export type ResourceName = "customers" | "assets" | "asset_types";
+export type ResourceName = "customers" | "assets" | "asset_types" | "customers_assets";
 
 export async function listResource(resource: string, query?: any) {
     const range = query?.range
@@ -14,11 +14,19 @@ export async function listResource(resource: string, query?: any) {
     const [from, to] = range;
     const [field, order] = sort;
 
-    return supabase
+    const result = await supabase
         .from(resource)
         .select("*", { count: "exact" })
         .range(from, to)
         .order(field, { ascending: order === "ASC" });
+
+    return {
+        ...result,
+        meta: {
+            range,
+            sort,
+        },
+    };
 }
 
 export function getResourceById(resource: ResourceName, id: string) {
