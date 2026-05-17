@@ -2,7 +2,7 @@ import supabase from "./supabase";
 
 export type ResourceName = "customers" | "assets" | "asset_types" | "customers_assets";
 
-export async function listResource(resource: string, query?: any) {
+export async function listResource(resource: ResourceName, query?: any) {
     const range = query?.range
         ? JSON.parse(query.range)
         : [0, 9];
