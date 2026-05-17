@@ -16,14 +16,17 @@ import {AssetTypeShow} from "@/components/react-admin/asset-types/AssetTypeShow"
 import {AssetShow} from "@/components/react-admin/assets/AssetShow";
 import {AssetEdit} from "@/components/react-admin/assets/AssetEdit";
 import {AssetTypeEdit} from "@/components/react-admin/asset-types/AssetTypeEdit";
+import PeopleIcon from "@mui/icons-material/People";
+import BuildIcon from "@mui/icons-material/Build";
+import CategoryIcon from "@mui/icons-material/Category";
 
 export default function App() {
     return (
         <NoSsr>
             <Admin dataProvider={dataProvider}>
-                <Resource name="customers" list={CustomerList} edit={CustomerEdit} show={CustomerShow} create={CustomerCreate}/>
-                <Resource name="assets" list={AssetList} edit={AssetEdit} show={AssetShow} create={AssetCreate}/>
-                <Resource name="asset_types" list={AssetTypeList} edit={AssetTypeEdit} show={AssetTypeShow} create={AssetTypeCreate}/>
+                <Resource name="customers" list={CustomerList} edit={CustomerEdit} show={CustomerShow} create={CustomerCreate} icon={PeopleIcon}/>
+                <Resource name="assets" list={AssetList} edit={AssetEdit} show={AssetShow} create={AssetCreate} icon={BuildIcon}/>
+                <Resource name="asset_types" list={AssetTypeList} edit={AssetTypeEdit} show={AssetTypeShow} create={AssetTypeCreate} icon={CategoryIcon}/>
             </Admin>
         </NoSsr>
     );
