@@ -20,8 +20,9 @@ export async function PUT(
 ) {
     const { id } = await context.params;
     const body = await req.json();
+    const { id: _ignored, ...updateData } = body;
 
-    const result = await updateResource("asset_types", id, body);
+    const result = await updateResource("asset_types", id, updateData);
     return handleResult(result);
 }
 
