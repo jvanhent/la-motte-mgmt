@@ -4,6 +4,7 @@ const allowed: string[] = [
     "customers",
     "assets",
     "asset_types",
+    "customers_assets",
 ];
 
 function checkResource(resource: string) {
