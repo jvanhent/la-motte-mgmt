@@ -10,7 +10,7 @@ export async function GET(
     context: { params: Promise<{ id: string }> }
 ) {
     const { id } = await context.params;
-    const result = await getResourceById("assets", id);
+    const result = await getResourceById("asset_types", id);
     return handleResult(result);
 }
 
@@ -20,8 +20,9 @@ export async function PUT(
 ) {
     const { id } = await context.params;
     const body = await req.json();
+    const { id: _ignored, ...updateData } = body;
 
-    const result = await updateResource("assets", id, body);
+    const result = await updateResource("asset_types", id, updateData);
     return handleResult(result);
 }
 
@@ -30,6 +31,6 @@ export async function DELETE(
     context: { params: Promise<{ id: string }> }
 ) {
     const { id } = await context.params;
-    const result = await deleteResource("assets", id);
+    const result = await deleteResource("asset_types", id);
     return handleResult(result);
 }
