@@ -3,7 +3,7 @@
 import {
     BooleanField,
     Datagrid,
-    DateField,
+    DateField, NumberField,
     ReferenceField,
     ReferenceManyField,
     Show,
@@ -25,35 +25,20 @@ const CustomerShow = () => (
                 target="customer_id"
             >
                 <Datagrid bulkActionButtons={false}>
-                    <ReferenceField
-                        label="Asset"
-                        source="asset_id"
-                        reference="assets"
-                    >
+                    <ReferenceField label="Name" source="asset_id" reference="assets" >
                         <TextField source="name" />
                     </ReferenceField>
-                    <ReferenceField
-                        source="asset_id"
-                        reference="assets"
-                        link={false}
-                    >
-                        <BooleanField source="is_active" />
+                    <NumberField source="ref_price" label="Price"/>
+
+                    <ReferenceField label="Active" source="asset_id" reference="assets" link={false}>
+                        <BooleanField source="is_active" label={true} />
                     </ReferenceField>
 
-                    <ReferenceField
-                        label="Type"
-                        source="asset_id"
-                        reference="assets"
-                        link={false}
-                    >
-                        <ReferenceField
-                            source="asset_type_id"
-                            reference="asset_types"
-                        >
+                    <ReferenceField label="Type" source="asset_id" reference="assets" link={false}>
+                        <ReferenceField source="asset_type_id" reference="asset_types">
                             <TextField source="label" />
                         </ReferenceField>
                     </ReferenceField>
-
                 </Datagrid>
             </ReferenceManyField>
         </SimpleShowLayout>

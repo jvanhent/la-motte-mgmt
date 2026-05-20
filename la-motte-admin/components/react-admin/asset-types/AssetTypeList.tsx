@@ -1,6 +1,6 @@
 "use client";
 
-import { Datagrid, List, TextField } from 'react-admin';
+import { Datagrid, List, TextField, NumberField } from 'react-admin';
 
 const AssetTypeList = () => (
     <List>
@@ -8,6 +8,7 @@ const AssetTypeList = () => (
             <TextField source="id" />
             <TextField source="code" />
             <TextField source="label" />
+            <NumberField source="ref_price" />
         </Datagrid>
     </List>
 

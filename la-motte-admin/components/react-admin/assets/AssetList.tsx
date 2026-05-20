@@ -8,7 +8,7 @@ import {
     ReferenceField,
     SelectInput,
     ReferenceInput,
-    BooleanInput, TextInput
+    BooleanInput, TextInput, NumberField
 } from 'react-admin';
 
 const assetFilters = [
@@ -25,6 +25,7 @@ const AssetList = () => (
         <Datagrid>
             <TextField source="id" />
             <TextField source="name" />
+            <NumberField source="ref_price" />
             <BooleanField source="is_active" />
             <ReferenceField reference="asset_types" source="asset_type_id" />
         </Datagrid>
