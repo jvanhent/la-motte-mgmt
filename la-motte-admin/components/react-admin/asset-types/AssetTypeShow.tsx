@@ -1,4 +1,4 @@
-import { Show, SimpleShowLayout, TextField } from 'react-admin'
+import {NumberField, Show, SimpleShowLayout, TextField} from 'react-admin'
 
 export const AssetTypeShow = () => (
     <Show>
@@ -6,6 +6,7 @@ export const AssetTypeShow = () => (
             <TextField source="id" />
             <TextField source="code" />
             <TextField source="label" />
+            <NumberField source="ref_price" />
         </SimpleShowLayout>
     </Show>
 )

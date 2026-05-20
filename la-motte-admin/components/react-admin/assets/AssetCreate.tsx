@@ -5,7 +5,7 @@ import {
     BooleanInput,
     ReferenceInput,
     SelectInput,
-    required,
+    required, NumberInput,
 } from "react-admin"
 
 export default function AssetCreate() {
@@ -16,6 +16,7 @@ export default function AssetCreate() {
                     <SelectInput optionText="label" validate={[required()]}/>
                 </ReferenceInput>
                 <TextInput source="name" validate={[required()]} fullWidth/>
+                <NumberInput source="ref_price" step={1} validate={[required()]}/>
                 <BooleanInput source="is_active" defaultValue={true}/>
             </SimpleForm>
         </Create>

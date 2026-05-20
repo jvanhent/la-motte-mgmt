@@ -1,7 +1,7 @@
 import {
     BooleanInput,
     DateInput,
-    Edit,
+    Edit, NumberInput,
     ReferenceInput,
     required,
     SelectInput,
@@ -17,6 +17,7 @@ export const AssetEdit = () => (
                 <SelectInput optionText="label" validate={[required()]}/>
             </ReferenceInput>
             <TextInput source="name" validate={[required()]}/>
+            <NumberInput source="ref_price" step={1} validate={[required()]}/>
             <BooleanInput source="is_active" />
             <DateInput source="created_at" />
         </SimpleForm>

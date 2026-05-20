@@ -13,6 +13,45 @@ function checkResource(resource: string) {
     }
 }
 
+function parseFilter(filter: any = {}) {
+    const conditions: ((query: any) => any)[] = [];
+
+    for (const [key, value] of Object.entries(filter)) {
+        if (value === undefined || value === null) continue;
+
+        // 👉 array = IN query
+        if (Array.isArray(value)) {
+            conditions.push((q) =>
+                q.in(key, value)
+            );
+            continue;
+        }
+
+        // string → ilike (search)
+        if (typeof value === "string") {
+            conditions.push((q) =>
+                q.ilike(key, `%${value}%`)
+            );
+            continue;
+        }
+
+        // boolean / number → exact match
+        if (typeof value === "boolean" || typeof value === "number") {
+            conditions.push((q) =>
+                q.eq(key, value)
+            );
+            continue;
+        }
+
+        // fallback
+        conditions.push((q) =>
+            q.eq(key, value)
+        );
+    }
+
+    return conditions;
+}
+
 export async function listResource(resource: string, query?: any) {
     checkResource(resource)
     const range = query?.range
@@ -23,14 +62,27 @@ export async function listResource(resource: string, query?: any) {
         ? JSON.parse(query.sort)
         : ["id", "ASC"];
 
+    const filter = query?.filter
+        ? JSON.parse(query.filter)
+        : {};
+
     const [from, to] = range;
     const [field, order] = sort;
 
-    const result = await supabase
+    let dbQuery = supabase
         .from(resource)
         .select("*", { count: "exact" })
         .range(from, to)
-        .order(field, { ascending: order === "ASC" });
+        .order(field, { ascending: order === "ASC" })
+
+    // ✅ apply filters
+    const conditions = parseFilter(filter);
+
+    for (const apply of conditions) {
+        dbQuery = apply(dbQuery);
+    }
+
+    const result = await dbQuery
 
     return {
         ...result,

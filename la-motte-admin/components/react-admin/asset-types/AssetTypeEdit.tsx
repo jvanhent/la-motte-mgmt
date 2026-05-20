@@ -1,4 +1,4 @@
-import {Edit, required, SimpleForm, TextInput} from 'react-admin'
+import {Edit, NumberInput, required, SimpleForm, TextInput} from 'react-admin'
 
 export const AssetTypeEdit = () => (
     <Edit>
@@ -6,6 +6,7 @@ export const AssetTypeEdit = () => (
             <TextInput source="id" readOnly/>
             <TextInput source="code" validate={[required()]}/>
             <TextInput source="label" />
+            <NumberInput source="ref_price" step={1} validate={[required()]}/>
         </SimpleForm>
     </Edit>
 )
